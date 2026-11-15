@@ -13,7 +13,7 @@
   --ink: #17191c;
   --bone: #e9e5d8;
   --steel: #9aa2a7;
-  --steel-dark: #6d7478;
+  --steel-dark: #8a9196;
   --line-dark: #34393e;
   --line-light: #d4d1c6;
   --display: "Big Shoulders Display", "Arial Narrow", sans-serif;
@@ -184,7 +184,7 @@ a { color: inherit; }
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   color: var(--bone);
 }
-.hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 2.2rem; }
+.hero-cta { display: flex; flex-wrap: wrap; align-items: stretch; gap: 1rem; margin-top: 2.2rem; }
 
 /* the call plate: our signature. a route sign for the phone number. */
 .call-plate {
@@ -211,6 +211,7 @@ a { color: inherit; }
 
 .ghost-btn {
   display: inline-flex; align-items: center; gap: .55rem;
+  min-height: 4.2rem;
   color: #fff; text-decoration: none; font-weight: 700;
   padding: 1rem 1.35rem;
   border: 2px solid rgba(255,255,255,.55);
@@ -219,7 +220,7 @@ a { color: inherit; }
 .ghost-btn:hover { border-color: var(--signal); background: rgba(255,200,5,.12); }
 .ghost-btn svg { width: 17px; height: 17px; }
 
-.hero-rating { margin-top: 2.4rem; color: var(--bone); font-size: .95rem; }
+.hero-rating { margin-top: 2.4rem; color: #fff; font-size: 1.02rem; text-shadow: 0 1px 8px rgba(0,0,0,.8); }
 .hero-rating a { color: #fff; text-decoration-color: var(--signal); text-underline-offset: 3px; }
 .hero-rating .star-row { color: var(--signal); letter-spacing: 2px; margin-right: .5rem; }
 
@@ -244,7 +245,7 @@ a { color: inherit; }
   color: var(--signal); text-transform: uppercase;
   white-space: nowrap;
 }
-.ticker-track i { font-style: normal; color: var(--steel-dark); }
+.ticker-track i { font-style: normal; color: #6b7276; font-weight: 600; }
 @keyframes roll { to { transform: translateX(-50%); } }
 
 /* ---------- sections ---------- */
@@ -437,7 +438,7 @@ h2 em { font-style: normal; color: var(--signal); }
 .site-foot a { color: var(--bone); text-decoration: none; }
 .site-foot a:hover { color: var(--signal); }
 .site-foot ul { list-style: none; display: grid; gap: .35rem; }
-.foot-legal { margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1px solid var(--line-dark); font-size: .85rem; }
+.foot-legal { margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1px solid var(--line-dark); font-size: .85rem; color: #aab2b6; }
 
 /* ---------- mobile call bar ---------- */
 .call-bar {
@@ -456,8 +457,9 @@ h2 em { font-style: normal; color: var(--signal); }
 }
 
 /* ---------- scroll reveal ---------- */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-.reveal.in { opacity: 1; transform: none; }
+.reveal.pre { opacity: 0; transform: translateY(28px); }
+.reveal.pre { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.pre.in { opacity: 1; transform: none; }
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

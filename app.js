@@ -32,20 +32,40 @@
     });
   }
 
-  /* scroll reveal */
-  var revealEls = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
+  /* scroll reveal: content is visible by default; only elements that start
+     below the fold are hidden and revealed on scroll. If observation ever
+     fails to fire, a timed fallback reveals them anyway. */
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  var hidden = [];
+  revealEls.forEach(function (el) {
+    if (el.getBoundingClientRect().top > vh - 60) {
+      el.classList.add("pre");
+      hidden.push(el);
+    }
+  });
+  function show(el) {
+    el.classList.remove("pre");
+    el.classList.add("in");
+  }
+  if ("IntersectionObserver" in window && hidden.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          entry.target.classList.add("in");
+          show(entry.target);
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    revealEls.forEach(function (el) { io.observe(el); });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add("in"); });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+    hidden.forEach(function (el) { io.observe(el); });
+    /* safety net: reveal anything still hidden after 4 seconds if it is in view,
+       and everything by 12 seconds no matter what */
+    setTimeout(function () {
+      hidden.forEach(function (el) {
+        if (el.classList.contains("pre") && el.getBoundingClientRect().top < vh) show(el);
+      });
+    }, 4000);
+    setTimeout(function () { hidden.forEach(show); }, 12000);
   }
 
   /* gallery lightbox */
