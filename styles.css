@@ -200,7 +200,7 @@ a { color: inherit; }
 }
 .call-plate:hover { transform: translate(-2px,-2px); box-shadow: 9px 9px 0 rgba(255,200,5,.3); }
 .call-plate .plate-label { font-weight: 700; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
-.call-plate .plate-number {
+.call-plate .plate-number { white-space: nowrap;
   font-family: var(--display);
   font-weight: 800;
   font-size: clamp(1.7rem, 3.4vw, 2.5rem);
@@ -476,4 +476,9 @@ h2 em { font-style: normal; color: var(--signal); }
   .hero-bg, .rise, .ticker-track { animation: none !important; }
   .rise { opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 480px) {
+  .call-plate .plate-number { font-size: 1.45rem; }
+  .call-plate { padding: .9rem 1.1rem; }
 }
