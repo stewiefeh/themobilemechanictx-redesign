@@ -32,81 +32,21 @@
     });
   }
 
-  /* scroll reveal: content is visible by default; only elements that start
-     below the fold are hidden and revealed on scroll. If observation ever
-     fails to fire, a timed fallback reveals them anyway. */
+  /* entrance motion: elements are always visible; when one approaches the
+     viewport it plays a short fade-up. Nothing is ever hidden by default,
+     so the page renders complete even with scripts off or blocked. */
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-  var vh = window.innerHeight || document.documentElement.clientHeight;
-  var hidden = [];
-  revealEls.forEach(function (el) {
-    if (el.getBoundingClientRect().top > vh - 60) {
-      el.classList.add("pre");
-      hidden.push(el);
-    }
-  });
-  function show(el) {
-    el.classList.remove("pre");
-    el.classList.add("in");
-  }
-  if ("IntersectionObserver" in window && hidden.length) {
+  if ("IntersectionObserver" in window && revealEls.length) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          show(entry.target);
+          entry.target.classList.add("in");
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-    hidden.forEach(function (el) { io.observe(el); });
-    /* safety net: reveal anything still hidden after 4 seconds if it is in view,
-       and everything by 12 seconds no matter what */
-    setTimeout(function () {
-      hidden.forEach(function (el) {
-        if (el.classList.contains("pre") && el.getBoundingClientRect().top < vh) show(el);
-      });
-    }, 4000);
-    setTimeout(function () { hidden.forEach(show); }, 12000);
+    }, { threshold: 0, rootMargin: "0px 0px 220px 0px" });
+    revealEls.forEach(function (el) { io.observe(el); });
   }
-
-  /* gallery lightbox */
-  var gallery = document.getElementById("gallery-grid");
-  var lightbox = document.getElementById("lightbox");
-  var lbImg = lightbox ? lightbox.querySelector("img") : null;
-  var lbCap = lightbox ? lightbox.querySelector(".lb-cap") : null;
-  var figures = gallery ? Array.prototype.slice.call(gallery.querySelectorAll("figure")) : [];
-  var current = -1;
-  var lastFocus = null;
-
-  function openLb(index) {
-    if (!lightbox || !figures.length) return;
-    lastFocus = document.activeElement;
-    current = index;
-    var fig = figures[index];
-    var img = fig.querySelector("img");
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    var cap = fig.getAttribute("data-cap") || "";
-    var cred = fig.querySelector(".cred");
-    lbCap.textContent = cred ? cap + " — " + cred.textContent : cap;
-    lightbox.classList.add("open");
-    document.body.style.overflow = "hidden";
-    lightbox.querySelector(".lb-close").focus();
-  }
-  function closeLb() {
-    if (!lightbox) return;
-    lightbox.classList.remove("open");
-    document.body.style.overflow = "";
-    lbImg.src = "";
-    if (lastFocus) lastFocus.focus();
-  }
-  function stepLb(delta) {
-    if (current < 0) return;
-    openLb((current + delta + figures.length) % figures.length);
-  }
-
-  if (gallery && lightbox) {
-    figures.forEach(function (fig, i) {
-      fig.addEventListener("click", function () { openLb(i); });
       fig.setAttribute("tabindex", "0");
       fig.setAttribute("role", "button");
       fig.setAttribute("aria-label", "Open photo: " + (fig.getAttribute("data-cap") || ""));
