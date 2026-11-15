@@ -47,9 +47,45 @@
     }, { threshold: 0, rootMargin: "0px 0px 220px 0px" });
     revealEls.forEach(function (el) { io.observe(el); });
   }
+
+  /* gallery lightbox: click a photo to view it large; arrow keys move,
+     Escape closes. */
+  var gallery = document.getElementById("gallery-grid");
+  var lightbox = document.getElementById("lightbox");
+  if (gallery && lightbox) {
+    var figs = Array.prototype.slice.call(gallery.querySelectorAll("figure"));
+    var lbImg = lightbox.querySelector("img");
+    var lbCap = lightbox.querySelector(".lb-cap");
+    var current = 0;
+
+    function show(i) {
+      current = (i + figs.length) % figs.length;
+      var fig = figs[current];
+      var img = fig.querySelector("img");
+      if (lbImg) {
+        lbImg.src = img.getAttribute("src");
+        lbImg.alt = img.getAttribute("alt") || "";
+      }
+      if (lbCap) lbCap.textContent = fig.getAttribute("data-cap") || "";
+    }
+    function openLb(i) {
+      show(i);
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+      var close = lightbox.querySelector(".lb-close");
+      if (close) close.focus();
+    }
+    function closeLb() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    function stepLb(d) { show(current + d); }
+
+    figs.forEach(function (fig, i) {
       fig.setAttribute("tabindex", "0");
       fig.setAttribute("role", "button");
       fig.setAttribute("aria-label", "Open photo: " + (fig.getAttribute("data-cap") || ""));
+      fig.addEventListener("click", function () { openLb(i); });
       fig.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLb(i); }
       });
