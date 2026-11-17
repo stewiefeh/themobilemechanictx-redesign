@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=8">
+<link rel="stylesheet" href="styles.css?v=9">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +33,14 @@
   },
   "geo": { "@type": "GeoCoordinates", "latitude": 29.4144042, "longitude": -98.5627588 },
   "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:30", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "08:00", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "11:00", "closes": "22:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "09:00", "closes": "00:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:00", "closes": "01:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "09:00", "closes": "00:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "00:00", "closes": "23:59" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "07:30", "closes": "03:00" }
+], "opens": "09:30", "closes": "18:00" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "13:00", "closes": "21:00" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:30", "closes": "18:00" }
   ],
@@ -289,10 +296,14 @@
         <p><a href="https://www.google.com/maps/search/?api=1&amp;query=All+American%27s+Tire+%26+Auto+Repair%2C+1702+Castroville+Rd%2C+San+Antonio%2C+TX+78237&amp;query_place_id=ChIJ8RCRe_FZXIYR-IPLhQsCaGQ" target="_blank" rel="noopener">Open in Google Maps</a></p>
       </div>
       <dl class="hours">
-        <div class="hours-row"><dt>Monday – Friday</dt><dd>9:30 AM – 6:00 PM</dd></div>
-        <div class="hours-row"><dt>Saturday</dt><dd>1:00 PM – 9:00 PM</dd></div>
-        <div class="hours-row"><dt>Sunday</dt><dd>9:30 AM – 6:00 PM</dd></div>
-      </dl>
+        <div class="hours-row"><dt>Monday</dt><dd>8:00 AM &ndash; 11:00 PM</dd></div>
+        <div class="hours-row"><dt>Tuesday</dt><dd>11:00 AM &ndash; 10:00 PM</dd></div>
+        <div class="hours-row"><dt>Wednesday</dt><dd>9:00 AM &ndash; 12:00 AM</dd></div>
+        <div class="hours-row"><dt>Thursday</dt><dd>9:00 AM &ndash; 1:00 AM</dd></div>
+        <div class="hours-row"><dt>Friday</dt><dd>9:00 AM &ndash; 12:00 AM</dd></div>
+        <div class="hours-row"><dt>Saturday</dt><dd>Open 24 hours</dd></div>
+        <div class="hours-row"><dt>Sunday</dt><dd>7:30 AM &ndash; 3:00 AM</dd></div>
+        </dl>
       <p class="hours-note">Mobile mechanic and roadside assistance run 7 days a week. Stranded outside shop hours? Call anyway and we'll tell you when we can get to you.</p>
     </div>
     <div class="map-frame reveal">
@@ -319,9 +330,9 @@
           <li><a href="tel:+12103676811">(210) 367-6811</a></li>
           <li>1702 Castroville Rd</li>
           <li>San Antonio, TX 78237</li>
-          <li style="margin-top:.45rem; color:#aab2b6;">Mon &ndash; Fri, 9:30 AM &ndash; 6 PM</li>
-          <li style="color:#aab2b6;">Saturday, 1 &ndash; 9 PM</li>
-          <li style="color:#aab2b6;">Sunday, 9:30 AM &ndash; 6 PM</li>
+          <li style="margin-top:.45rem; color:#aab2b6;">Mon, 8 AM &ndash; 11 PM &middot; Tue, 11 AM &ndash; 10 PM</li>
+          <li style="color:#aab2b6;">Wed &amp; Fri, 9 AM &ndash; 12 AM &middot; Thu, 9 AM &ndash; 1 AM</li>
+          <li style="color:#aab2b6;">Sat open 24 hours &middot; Sun, 7:30 AM &ndash; 3 AM</li>
         </ul>
       </div>
       <div>
@@ -336,6 +347,7 @@
       </div>
     </div>
     <p class="foot-legal">© <span id="year">2026</span> All American's Tire &amp; Auto Repair. All rights reserved.</p>
+    <p class="built-by">Site built by <a href="https://stewiefeh.github.io/stewiefeh-studio/" rel="noopener">stewiefeh studio</a></p>
   </div>
 </footer>
 
@@ -350,6 +362,6 @@
   <p class="lb-cap"></p>
 </div>
 
-<script src="app.js?v=8"></script>
+<script src="app.js?v=9"></script>
 </body>
 </html>

@@ -482,3 +482,6 @@ h2 em { font-style: normal; color: var(--signal); }
   .call-plate .plate-number { font-size: 1.45rem; }
   .call-plate { padding: .9rem 1.1rem; }
 }
+.built-by { margin-top: .9rem; font-size: .8rem; color: #8a9196; }
+.built-by a { color: #8a9196; text-decoration: underline; text-underline-offset: 3px; }
+.built-by a:hover { color: var(--signal); }
